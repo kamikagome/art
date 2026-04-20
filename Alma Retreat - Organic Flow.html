@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALMA — Art & Yoga Retreat · Andalucía</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <template id="__bundler_thumbnail" data-bg-color="#F3E9D6">
+    <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="260" fill="#F3E9D6"/>
+      <!-- blob bg -->
+      <ellipse cx="310" cy="60" rx="120" ry="110" fill="#6E8060" opacity="0.18" transform="rotate(-20 310 60)"/>
+      <ellipse cx="80" cy="200" rx="90" ry="80" fill="#C1654A" opacity="0.15" transform="rotate(15 80 200)"/>
+      <!-- nav line -->
+      <rect x="40" y="30" width="320" height="1" fill="#D0BFA8"/>
+      <rect x="40" y="30" width="80" height="8" rx="4" fill="#C1654A" opacity="0.7"/>
+      <!-- headline lines -->
+      <rect x="40" y="70" width="160" height="14" rx="3" fill="#1C1009" opacity="0.8"/>
+      <rect x="40" y="92" width="140" height="14" rx="3" fill="#1C1009" opacity="0.8"/>
+      <rect x="40" y="114" width="120" height="14" rx="3" fill="#C1654A" opacity="0.8"/>
+      <!-- body text -->
+      <rect x="40" y="142" width="180" height="6" rx="2" fill="#7A6050" opacity="0.5"/>
+      <rect x="40" y="154" width="160" height="6" rx="2" fill="#7A6050" opacity="0.4"/>
+      <rect x="40" y="166" width="140" height="6" rx="2" fill="#7A6050" opacity="0.35"/>
+      <!-- CTA button -->
+      <rect x="40" y="185" width="110" height="28" rx="14" fill="#C1654A"/>
+      <rect x="160" y="185" width="100" height="28" rx="14" fill="none" stroke="#D0BFA8" stroke-width="1.5"/>
+      <!-- organic image shape -->
+      <ellipse cx="300" cy="145" rx="78" ry="90" fill="#C8A888" opacity="0.6" transform="rotate(-10 300 145)"/>
+      <ellipse cx="300" cy="145" rx="78" ry="90" fill="none" stroke="#B49070" stroke-width="1" opacity="0.4" transform="rotate(-10 300 145)"/>
+      <!-- badge -->
+      <rect x="228" y="205" width="70" height="36" rx="8" fill="#FAF6EF"/>
+      <rect x="236" y="213" width="30" height="8" rx="2" fill="#C1654A" opacity="0.7"/>
+      <rect x="236" y="225" width="50" height="6" rx="2" fill="#7A6050" opacity="0.4"/>
+    </svg>
+  </template>
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; overflow-x: hidden; }
+    a { text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; }
+
+    .tweaks-panel {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+      background: rgba(15,8,3,0.93); backdrop-filter: blur(16px);
+      border-radius: 14px; padding: 20px 22px; width: 230px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35); color: #fff;
+      font-family: 'DM Serif Display', serif;
+      animation: fadeUp 0.2s ease;
+    }
+    @keyframes fadeUp { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform:none; } }
+    .tweaks-panel h4 { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.4; margin-bottom: 16px; font-family: sans-serif; font-weight: 600; }
+    .tw-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 13px; }
+    .tw-label { font-size: 12px; opacity: 0.75; font-family: sans-serif; font-weight: 400; }
+    .tw-select {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.12);
+      color: #fff; font-family: sans-serif; font-size: 11px;
+      padding: 5px 8px; border-radius: 6px; cursor: pointer; outline: none;
+    }
+    .tw-toggle {
+      width: 36px; height: 20px; border-radius: 10px; border: none;
+      background: rgba(255,255,255,0.15); position: relative; cursor: pointer; transition: background 0.2s;
+    }
+    .tw-toggle.on { background: #C1654A; }
+    .tw-toggle::after { content: ''; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: white; transition: transform 0.2s; }
+    .tw-toggle.on::after { transform: translateX(16px); }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+const Img = ({ label, h = 400, c1 = '#D4B896', c2 = '#BEA07C', style = {} }) => (
+  <div style={{
+    width: '100%', height: h, position: 'relative', overflow: 'hidden', flexShrink: 0,
+    background: `repeating-linear-gradient(135deg, ${c1} 0px, ${c1} 14px, ${c2} 14px, ${c2} 28px)`,
+    ...style
+  }}>
+    <div style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center' }}>
+      <span style={{ fontFamily:'monospace', fontSize:11, color:'rgba(0,0,0,0.3)', background:'rgba(255,255,255,0.4)', padding:'5px 12px', borderRadius:2, letterSpacing:'0.06em' }}>{label}</span>
+    </div>
+  </div>
+);
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accentColor": "#C1654A",
+  "sageColor": "#6E8060",
+  "roundedCards": true,
+  "retreatDate": "September 13–20, 2026"
+}/*EDITMODE-END*/;
+
+const App = () => {
+  const [tweaks, setTweaks] = useState(TWEAK_DEFAULTS);
+  const [showTweaks, setShowTweaks] = useState(false);
+
+  useEffect(()=>{
+    const handler = e => {
+      if (e.data?.type === '__activate_edit_mode') setShowTweaks(true);
+      if (e.data?.type === '__deactivate_edit_mode') setShowTweaks(false);
+    };
+    window.addEventListener('message', handler);
+    window.parent.postMessage({ type:'__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
+  const setKey = (key, val) => {
+    setTweaks(t => ({ ...t, [key]: val }));
+    window.parent.postMessage({ type:'__edit_mode_set_keys', edits: { [key]: val } }, '*');
+  };
+
+  const col = {
+    bg: '#F3E9D6',
+    tx: '#1C1009',
+    mid: '#7A6050',
+    ac: tweaks.accentColor,
+    sage: tweaks.sageColor,
+    sand: '#E8D5B8',
+    ln: '#D0BFA8'
+  };
+  const DM = { fontFamily:"'DM Serif Display',serif" };
+  const CG = { fontFamily:"'Cormorant Garamond',serif" };
+  const cardRadius = tweaks.roundedCards ? 18 : 4;
+
+  return (
+    <div style={{ ...CG, background:col.bg, color:col.tx, minHeight:'100vh', overflow:'hidden' }}>
+
+      {/* ── NAV ── */}
+      <nav style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'28px 56px' }}>
+        <span style={{ ...DM, fontSize:22, color:col.ac }}>Alma Retreat</span>
+        <div style={{ display:'flex', gap:36 }}>
+          {['Retreats','Art','Yoga','Place','Book'].map(l=>(
+            <a key={l} href="#" style={{ color:col.mid, fontSize:14, letterSpacing:'0.06em' }}>{l}</a>
+          ))}
+        </div>
+      </nav>
+
+      {/* ── HERO ── */}
+      <section style={{ position:'relative', padding:'32px 56px 0', display:'grid', gridTemplateColumns:'1.15fr 1fr', gap:56, alignItems:'center', minHeight:'74vh' }}>
+        {/* Organic blobs */}
+        <div style={{ position:'absolute', top:-120, right:-180, width:560, height:560, borderRadius:'58% 42% 68% 32% / 48% 62% 38% 52%', background:col.sage, opacity:0.13, pointerEvents:'none', zIndex:0 }} />
+        <div style={{ position:'absolute', bottom:-100, left:-80, width:380, height:380, borderRadius:'42% 58% 32% 68% / 62% 38% 72% 28%', background:col.ac, opacity:0.1, pointerEvents:'none', zIndex:0 }} />
+
+        <div style={{ position:'relative', zIndex:1 }}>
+          <div style={{ display:'inline-flex', alignItems:'center', gap:10, background:col.sand, borderRadius:50, padding:'8px 20px', marginBottom:30 }}>
+            <div style={{ width:6, height:6, borderRadius:'50%', background:col.ac }} />
+            <span style={{ fontSize:11, letterSpacing:'0.18em', textTransform:'uppercase', color:col.ac }}>Andalucía · Spain</span>
+          </div>
+          <h1 style={{ ...DM, fontSize:72, lineHeight:1.03, fontWeight:400, marginBottom:28 }}>
+            Create.<br/>Breathe.<br/><em style={{ color:col.ac }}>Belong.</em>
+          </h1>
+          <p style={{ fontSize:20, fontWeight:300, color:col.mid, lineHeight:1.78, maxWidth:400, marginBottom:44 }}>
+            Art and yoga retreats among the olive groves and white villages of southern Spain.
+          </p>
+          <div style={{ display:'flex', gap:16, alignItems:'center' }}>
+            <button style={{ background:col.ac, color:'#F3E9D6', border:'none', padding:'15px 36px', borderRadius:50, fontSize:14, letterSpacing:'0.08em', ...CG }}>Explore Retreats</button>
+            <button style={{ background:'none', border:`1.5px solid ${col.ln}`, color:col.tx, padding:'15px 36px', borderRadius:50, fontSize:14, letterSpacing:'0.08em', ...CG }}>Our Story</button>
+          </div>
+        </div>
+
+        <div style={{ position:'relative', zIndex:1 }}>
+          <div style={{ borderRadius:'58% 42% 48% 52% / 42% 52% 58% 48%', overflow:'hidden', boxShadow:`0 28px 72px rgba(100,54,20,0.18)` }}>
+            <Img label="yoga — hilltop at sunrise" h={520} c1="#C8A888" c2="#B4947A" />
+          </div>
+          <div style={{ position:'absolute', bottom:40, left:-24, background:'#FAF6EF', borderRadius:14, padding:'16px 22px', boxShadow:'0 8px 32px rgba(0,0,0,0.12)' }}>
+            <div style={{ ...DM, fontSize:28, color:col.ac, lineHeight:1 }}>7 days</div>
+            <div style={{ fontSize:12, color:col.mid, marginTop:4 }}>creative renewal</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── WAVE ── */}
+      <svg viewBox="0 0 1440 72" style={{ display:'block', marginTop:24, fill:col.sand }}>
+        <path d="M0,36 C360,72 1080,0 1440,36 L1440,72 L0,72 Z" />
+      </svg>
+
+      {/* ── OFFERINGS ── */}
+      <section style={{ background:col.sand, padding:'56px 56px 72px' }}>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:28 }}>
+          {[
+            { t:'Art Studio', d:'Daily creative sessions with local artists — painting, ceramics, printmaking in our sun-drenched cortijo studio.', img:'art studio — natural light', c:col.ac },
+            { t:'Yoga & Movement', d:'Morning flows, afternoon breathwork, evening gentle yoga as the Andalucían sun descends.', img:'yoga — open air terrace', c:col.sage },
+            { t:'Andalucía', d:'Village walks, market days, olive oil tastings, and long slow lunches under the trees.', c:'#B07048', img:'white village — winding street' },
+          ].map(({t,d,c,img})=>(
+            <div key={t} style={{ background:'#FAF6EF', borderRadius:cardRadius, overflow:'hidden' }}>
+              <Img label={img} h={200} c1="#D4BCA4" c2="#C0A888" />
+              <div style={{ padding:'24px 24px 28px' }}>
+                <div style={{ width:28, height:3, background:c, borderRadius:2, marginBottom:14 }} />
+                <h3 style={{ ...DM, fontSize:22, marginBottom:10 }}>{t}</h3>
+                <p style={{ fontSize:15, color:col.mid, lineHeight:1.78, fontWeight:300 }}>{d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── WAVE ── */}
+      <svg viewBox="0 0 1440 72" style={{ display:'block', fill:col.sand }}>
+        <path d="M0,36 C360,0 1080,72 1440,36 L1440,0 L0,0 Z" />
+      </svg>
+
+      {/* ── TESTIMONIAL ── */}
+      <section style={{ padding:'64px 56px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:80, alignItems:'center' }}>
+        <div>
+          <p style={{ fontSize:28, fontStyle:'italic', fontWeight:300, color:col.mid, lineHeight:1.6, marginBottom:24 }}>
+            "A week unlike anything else. I came home changed — in how I see colour, how I breathe, how I move through the world."
+          </p>
+          <div style={{ display:'flex', alignItems:'center', gap:14 }}>
+            <div style={{ width:40, height:40, borderRadius:'50%', background:col.sand }} />
+            <div>
+              <div style={{ fontSize:15, fontWeight:400 }}>Elena Vargas</div>
+              <div style={{ fontSize:13, color:col.mid }}>Barcelona, 2025</div>
+            </div>
+          </div>
+        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:20 }}>
+          {[['12','Max guests'],['7','Days'],['2','Daily sessions'],['14','Years running']].map(([n,l])=>(
+            <div key={l} style={{ background:col.sand, borderRadius:cardRadius, padding:'28px 24px', textAlign:'center' }}>
+              <div style={{ ...DM, fontSize:44, color:col.ac, lineHeight:1 }}>{n}</div>
+              <div style={{ fontSize:12, color:col.mid, marginTop:8, letterSpacing:'0.05em' }}>{l}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section style={{ padding:'56px 56px 80px', textAlign:'center' }}>
+        <h2 style={{ ...DM, fontSize:54, fontWeight:400, marginBottom:14 }}>{tweaks.retreatDate}</h2>
+        <p style={{ fontSize:19, color:col.mid, fontWeight:300, marginBottom:36 }}>12 places · All skill levels welcome · Full board included</p>
+        <button style={{ background:col.ac, color:'#F3E9D6', border:'none', padding:'18px 52px', borderRadius:50, fontSize:16, letterSpacing:'0.1em', ...CG }}>Book Your Retreat</button>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer style={{ borderTop:`1px solid ${col.ln}`, padding:'32px 56px', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+        <span style={{ ...DM, fontSize:18, color:col.ac }}>Alma Retreat</span>
+        <span style={{ fontSize:13, color:col.mid }}>Sierra Norte · Andalucía · Spain</span>
+        <span style={{ fontSize:13, color:col.mid }}>hola@almaretreat.es</span>
+      </footer>
+
+      {/* ── TWEAKS ── */}
+      {showTweaks && (
+        <div className="tweaks-panel">
+          <h4>Tweaks</h4>
+          <div className="tw-row">
+            <span className="tw-label">Accent color</span>
+            <select className="tw-select" value={tweaks.accentColor} onChange={e => setKey('accentColor', e.target.value)}>
+              <option value="#C1654A">Terracotta</option>
+              <option value="#7D3030">English Red</option>
+              <option value="#C9963A">Ochre Gold</option>
+              <option value="#6E8060">Sage Green</option>
+            </select>
+          </div>
+          <div className="tw-row">
+            <span className="tw-label">Blob color</span>
+            <select className="tw-select" value={tweaks.sageColor} onChange={e => setKey('sageColor', e.target.value)}>
+              <option value="#6E8060">Sage</option>
+              <option value="#C1654A">Terracotta</option>
+              <option value="#C9963A">Ochre</option>
+              <option value="#8A7898">Lavender</option>
+            </select>
+          </div>
+          <div className="tw-row">
+            <span className="tw-label">Rounded cards</span>
+            <button className={`tw-toggle${tweaks.roundedCards?' on':''}`} onClick={() => setKey('roundedCards', !tweaks.roundedCards)} />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
